@@ -1,0 +1,1268 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{DBMI 6018 Final Project + Exam}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{BMI 6018 Final Project \& Final
+Exam}\label{bmi-6018-final-project-final-exam}
+
+\section{Author: Tae Jang}\label{author-tae-jang}
+
+\subsection{Housing Price Prediction}\label{housing-price-prediction}
+
+\begin{itemize}
+\tightlist
+\item
+  Encoding \textless{}\textless{}\textless{} includes Final Exam
+\item
+  Data Split (train and test)
+\item
+  Variable Selection (RFE method)
+\item
+  Model Adjustments (ipywidgets)
+\item
+  Prediction
+\item
+  Validation
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{formula}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{smf} 
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{statistics} \PY{k}{as} \PY{n+nn}{s}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} 
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sn}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+        \PY{k+kn}{import} \PY{n+nn}{ipywidgets} \PY{k}{as} \PY{n+nn}{widgets}
+        \PY{k+kn}{from} \PY{n+nn}{ipywidgets} \PY{k}{import} \PY{n}{Layout}\PY{p}{,} \PY{n}{Button}\PY{p}{,} \PY{n}{Box}\PY{p}{,} \PY{n}{FloatText}\PY{p}{,} \PY{n}{Textarea}\PY{p}{,} \PY{n}{Dropdown}\PY{p}{,} \PY{n}{Label}\PY{p}{,} \PY{n}{IntSlider}\PY{p}{,} \PY{n}{FloatSlider}\PY{p}{,} \PY{n}{SelectMultiple}\PY{p}{,} \PY{n}{interactive}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}tkjan\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}statsmodels\textbackslash{}compat\textbackslash{}pandas.py:56: FutureWarning: The pandas.core.datetools module is deprecated and will be removed in a future version. Please use the pandas.tseries module instead.
+  from pandas.core import datetools
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}data imputed in R with \PYZdq{}missForest\PYZdq{} package}
+        
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{1234567}\PY{p}{)}
+        
+        \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{real\PYZus{}estate\PYZus{}data.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    Id  MSSubClass MSZoning  LotFrontage  LotArea Street Alley LotShape  \textbackslash{}
+        0   1          60       RL         65.0     8450   Pave  Pave      Reg   
+        1   2          20       RL         80.0     9600   Pave  Pave      Reg   
+        2   3          60       RL         68.0    11250   Pave  Pave      IR1   
+        3   4          70       RL         60.0     9550   Pave  Grvl      IR1   
+        4   5          60       RL         84.0    14260   Pave  Pave      IR1   
+        
+          LandContour Utilities    {\ldots}     PoolArea PoolQC  Fence MiscFeature MiscVal  \textbackslash{}
+        0         Lvl    AllPub    {\ldots}            0     Fa  GdPrv        Shed       0   
+        1         Lvl    AllPub    {\ldots}            0     Gd  MnPrv        Shed       0   
+        2         Lvl    AllPub    {\ldots}            0     Fa  GdPrv        Shed       0   
+        3         Lvl    AllPub    {\ldots}            0     Gd  GdPrv        Shed       0   
+        4         Lvl    AllPub    {\ldots}            0     Fa  GdPrv        Shed       0   
+        
+          MoSold YrSold  SaleType  SaleCondition  SalePrice  
+        0      2   2008        WD         Normal   208500.0  
+        1      5   2007        WD         Normal   181500.0  
+        2      9   2008        WD         Normal   223500.0  
+        3      2   2006        WD        Abnorml   140000.0  
+        4     12   2008        WD         Normal   250000.0  
+        
+        [5 rows x 81 columns]
+\end{Verbatim}
+            
+    \subsection{Encoding}\label{encoding}
+
+Encoding is necessary because for variable selection process. Most of
+variable selction methods (e.g. Recursive Feature Elimination (RFE) and
+regularization methods, Ridge and Lasso) do not support categorical
+variables. Encoding takes care of this problem as the outcome will turn
+into binary variables. We are encoding before we split the data.
+
+I was frustrated with encoding in the beginning of this project, but I
+found this subject interesting. I wanted to explore different encoding
+methods. This part includes tutorial (Final Exam).
+
+\textbf{\emph{Code Source}}
+
+https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get\_dummies.html
+
+https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
+
+https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}creating sample data to play with.}
+        \PY{n}{sample} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Street}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alley}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SaleCondition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LotFrontage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SalePrice}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+        \PY{n}{sample}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Pandas get\PYZus{}dummies method take only Pandas dataframe}
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{1234567}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{sample}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    LotFrontage  SalePrice  Street\_Grvl  Street\_Pave  Alley\_Grvl  Alley\_Pave  \textbackslash{}
+        0         65.0   208500.0            0            1           0           1   
+        1         80.0   181500.0            0            1           0           1   
+        2         68.0   223500.0            0            1           0           1   
+        3         60.0   140000.0            0            1           1           0   
+        4         84.0   250000.0            0            1           0           1   
+        
+           SaleCondition\_Abnorml  SaleCondition\_AdjLand  SaleCondition\_Alloca  \textbackslash{}
+        0                      0                      0                     0   
+        1                      0                      0                     0   
+        2                      0                      0                     0   
+        3                      1                      0                     0   
+        4                      0                      0                     0   
+        
+           SaleCondition\_Family  SaleCondition\_Normal  SaleCondition\_Partial  
+        0                     0                     1                      0  
+        1                     0                     1                      0  
+        2                     0                     1                      0  
+        3                     0                     0                      0  
+        4                     0                     1                      0  
+\end{Verbatim}
+            
+    Prefix of variable name can be changed. If prefix is not specified,
+get\_dummies will automatically grab categorical variables only and turn
+them into binary variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{sample}\PY{p}{,} \PY{n}{prefix}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ST}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Al}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}    LotFrontage  SalePrice  ST\_Grvl  ST\_Pave  Al\_Grvl  Al\_Pave  SC\_Abnorml  \textbackslash{}
+        0         65.0   208500.0        0        1        0        1           0   
+        1         80.0   181500.0        0        1        0        1           0   
+        2         68.0   223500.0        0        1        0        1           0   
+        3         60.0   140000.0        0        1        1        0           1   
+        4         84.0   250000.0        0        1        0        1           0   
+        
+           SC\_AdjLand  SC\_Alloca  SC\_Family  SC\_Normal  SC\_Partial  
+        0           0          0          0          1           0  
+        1           0          0          0          1           0  
+        2           0          0          0          1           0  
+        3           0          0          0          0           0  
+        4           0          0          0          1           0  
+\end{Verbatim}
+            
+    Let's look at a dataset with NAs.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}randomly inserting NaN}
+        \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{k+kc}{True}\PY{p}{,} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{sample}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n}{mask}\PY{p}{[}\PY{n}{mask}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{sample1} \PY{o}{=} \PY{n}{sample}\PY{o}{.}\PY{n}{mask}\PY{p}{(}\PY{n}{mask}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{sample1}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}encoding as it is}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{sample1}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  Street Alley SaleCondition  LotFrontage  SalePrice
+0   Pave  Pave           NaN          NaN   208500.0
+1    NaN   NaN        Normal          NaN   181500.0
+2    NaN   NaN        Normal         68.0   223500.0
+3    NaN   NaN       Abnorml         60.0        NaN
+4   Pave  Pave           NaN          NaN   250000.0
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}    LotFrontage  SalePrice  Street\_Grvl  Street\_Pave  Alley\_Grvl  Alley\_Pave  \textbackslash{}
+        0          NaN   208500.0            0            1           0           1   
+        1          NaN   181500.0            0            0           0           0   
+        2         68.0   223500.0            0            0           0           0   
+        3         60.0        NaN            0            0           0           0   
+        4          NaN   250000.0            0            1           0           1   
+        
+           SaleCondition\_Abnorml  SaleCondition\_AdjLand  SaleCondition\_Alloca  \textbackslash{}
+        0                      0                      0                     0   
+        1                      0                      0                     0   
+        2                      0                      0                     0   
+        3                      1                      0                     0   
+        4                      0                      0                     0   
+        
+           SaleCondition\_Family  SaleCondition\_Normal  SaleCondition\_Partial  
+        0                     0                     0                      0  
+        1                     0                     1                      0  
+        2                     0                     1                      0  
+        3                     0                     0                      0  
+        4                     0                     0                      0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}dummy\PYZus{}na agrument gives \PYZdq{}NaN columns\PYZdq{}}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{sample1}\PY{p}{,} \PY{n}{dummy\PYZus{}na}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}    LotFrontage  SalePrice  Street\_Grvl  Street\_Pave  Street\_nan  Alley\_Grvl  \textbackslash{}
+        0          NaN   208500.0            0            1           0           0   
+        1          NaN   181500.0            0            0           1           0   
+        2         68.0   223500.0            0            0           1           0   
+        3         60.0        NaN            0            0           1           0   
+        4          NaN   250000.0            0            1           0           0   
+        
+           Alley\_Pave  Alley\_nan  SaleCondition\_Abnorml  SaleCondition\_AdjLand  \textbackslash{}
+        0           1          0                      0                      0   
+        1           0          1                      0                      0   
+        2           0          1                      0                      0   
+        3           0          1                      1                      0   
+        4           1          0                      0                      0   
+        
+           SaleCondition\_Alloca  SaleCondition\_Family  SaleCondition\_Normal  \textbackslash{}
+        0                     0                     0                     0   
+        1                     0                     0                     1   
+        2                     0                     0                     1   
+        3                     0                     0                     0   
+        4                     0                     0                     0   
+        
+           SaleCondition\_Partial  SaleCondition\_nan  
+        0                      0                  1  
+        1                      0                  0  
+        2                      0                  0  
+        3                      0                  0  
+        4                      0                  1  
+\end{Verbatim}
+            
+    \subsubsection{LabelEncoder and
+OneHotEncoder}\label{labelencoder-and-onehotencoder}
+
+\paragraph{Slightly different kind of
+encoding}\label{slightly-different-kind-of-encoding}
+
+LabelEncoder assigns numerical values (not binaey values) to categorical
+variables. LabelEncoder takes only arrays. OneHotEncoder will turn these
+numerical values into binary matrix. Also, you can invert to the
+original categorical variables with LabelEncoder. A disadvantage of
+LabelEncoder and OneHotEncoder is that they do not support multiple
+columns at the same time. Each column has to be converted to array.
+
+As we learned in Natural Language Processing lecture, it is convinient
+for word vectors. Applications with encoding is unlimited.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{OneHotEncoder}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+        \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k}{import} \PY{n}{array}
+        \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k}{import} \PY{n}{argmax}
+        
+        
+        \PY{n}{sample\PYZus{}st}\PY{o}{=} \PY{n}{array}\PY{p}{(}\PY{n}{sample}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Street}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{sample\PYZus{}al}\PY{o}{=} \PY{n}{array}\PY{p}{(}\PY{n}{sample}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alley}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{sample\PYZus{}sc}\PY{o}{=} \PY{n}{array}\PY{p}{(}\PY{n}{sample}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SaleCondition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{le} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{integer\PYZus{}encoded} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{sample\PYZus{}sc}\PY{p}{)} \PY{c+c1}{\PYZsh{}\PYZlt{}\PYZhy{} change inputs here}
+        \PY{c+c1}{\PYZsh{}inv\PYZus{}sc=le.fit\PYZus{}transform(sample\PYZus{}sc)}
+        \PY{c+c1}{\PYZsh{}le.inverse\PYZus{}transform(inv\PYZus{}sc)}
+        
+        \PY{n}{onehot\PYZus{}encoder} \PY{o}{=} \PY{n}{OneHotEncoder}\PY{p}{(}\PY{n}{sparse}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        \PY{n}{integer\PYZus{}encoded} \PY{o}{=} \PY{n}{integer\PYZus{}encoded}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{integer\PYZus{}encoded}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{onehot\PYZus{}encoded} \PY{o}{=} \PY{n}{onehot\PYZus{}encoder}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{integer\PYZus{}encoded}\PY{p}{)}
+        \PY{n}{onehot\PYZus{}encoded}
+        
+        \PY{c+c1}{\PYZsh{}This array can be decomposed into 6 columns (just like get\PYZus{}dummies).}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} array([[0., 0., 0., 0., 1., 0.],
+               [0., 0., 0., 0., 1., 0.],
+               [0., 0., 0., 0., 1., 0.],
+               {\ldots},
+               [0., 0., 0., 0., 1., 0.],
+               [0., 0., 0., 0., 1., 0.],
+               [0., 0., 0., 0., 1., 0.]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}invert back to words}
+        \PY{n}{le}\PY{o}{.}\PY{n}{inverse\PYZus{}transform}\PY{p}{(}\PY{n}{integer\PYZus{}encoded}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}tkjan\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}preprocessing\textbackslash{}label.py:151: DeprecationWarning: The truth value of an empty array is ambiguous. Returning False, but in future this will result in an error. Use `array.size > 0` to check that an array is not empty.
+  if diff:
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} array([['Normal'],
+               ['Normal'],
+               ['Normal'],
+               {\ldots},
+               ['Normal'],
+               ['Normal'],
+               ['Normal']], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{encoder}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{encoder take a dataset of any kind and turns into encoded dataset}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{encoder}\PY{p}{(}\PY{n}{sample\PYZus{}sc}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}    0\_Abnorml  0\_AdjLand  0\_Alloca  0\_Family  0\_Normal  0\_Partial
+         0          0          0         0         0         1          0
+         1          0          0         0         0         1          0
+         2          0          0         0         0         1          0
+         3          1          0         0         0         0          0
+         4          0          0         0         0         1          0
+\end{Verbatim}
+            
+    \subsection{Now let us get back to the
+project}\label{now-let-us-get-back-to-the-project}
+
+Notice that 81 variables turned into 290 variables
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}Here, I\PYZsq{}m simply using Pandas get\PYZus{}dummies because it is the easiest and fastest option out there.}
+         \PY{n}{data1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+         \PY{n}{data1}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}    Id  MSSubClass  LotFrontage  LotArea  OverallQual  OverallCond  YearBuilt  \textbackslash{}
+         0   1          60         65.0     8450            7            5       2003   
+         1   2          20         80.0     9600            6            8       1976   
+         2   3          60         68.0    11250            7            5       2001   
+         3   4          70         60.0     9550            7            5       1915   
+         4   5          60         84.0    14260            8            5       2000   
+         
+            YearRemodAdd  MasVnrArea  BsmtFinSF1          {\ldots}            \textbackslash{}
+         0          2003       196.0         706          {\ldots}             
+         1          1976         0.0         978          {\ldots}             
+         2          2002       162.0         486          {\ldots}             
+         3          1970         0.0         216          {\ldots}             
+         4          2000       350.0         655          {\ldots}             
+         
+            SaleType\_ConLw  SaleType\_New  SaleType\_Oth  SaleType\_WD  \textbackslash{}
+         0               0             0             0            1   
+         1               0             0             0            1   
+         2               0             0             0            1   
+         3               0             0             0            1   
+         4               0             0             0            1   
+         
+            SaleCondition\_Abnorml  SaleCondition\_AdjLand  SaleCondition\_Alloca  \textbackslash{}
+         0                      0                      0                     0   
+         1                      0                      0                     0   
+         2                      0                      0                     0   
+         3                      1                      0                     0   
+         4                      0                      0                     0   
+         
+            SaleCondition\_Family  SaleCondition\_Normal  SaleCondition\_Partial  
+         0                     0                     1                      0  
+         1                     0                     1                      0  
+         2                     0                     1                      0  
+         3                     0                     0                      0  
+         4                     0                     1                      0  
+         
+         [5 rows x 290 columns]
+\end{Verbatim}
+            
+    \subsection{Train and Test Data Split}\label{train-and-test-data-split}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{train} \PY{p}{,}\PY{n}{test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{data1}\PY{p}{,}\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)} 
+         
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}NAs are taken care of}
+         \PY{n+nb}{sum}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1022
+438
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 0
+\end{Verbatim}
+            
+    \subsection{Variable Selection: Recursive Feature Elimination
+Method}\label{variable-selection-recursive-feature-elimination-method}
+
+https://machinelearningmastery.com/feature-selection-machine-learning-python/
+
+As we wanted to pick 20 most important variables, when we ran RFE with
+all 289 independent variables (including encoded variables), the result
+was only giving us encoded variable (which doesn't make any sense). So
+we decided to run RFE among continuous variables only (the result made
+more sense).
+
+For the sake of practice, we combined those two results to include in
+our regression.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}grouping continuous variables}
+         \PY{n}{num\PYZus{}df}\PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{num} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{num\PYZus{}df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}Recursive Feature Elimination Method}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}selection} \PY{k}{import} \PY{n}{RFE}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+         
+         \PY{c+c1}{\PYZsh{}dropping outcome variable for RFE (continuous variables only)}
+         \PY{n}{num1} \PY{o}{=} \PY{n}{num}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SalePrice}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{xvar} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SalePrice}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{yvar} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SalePrice}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}select 10 variables that are the most important}
+         \PY{n}{rfe} \PY{o}{=} \PY{n}{RFE}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{fit} \PY{o}{=} \PY{n}{rfe}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{num1}\PY{p}{,} \PY{n}{yvar}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}fit1 = rfe.fit(xvar, yvar)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Num Features: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{fit}\PY{o}{.}\PY{n}{n\PYZus{}features\PYZus{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Selected Features: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{fit}\PY{o}{.}\PY{n}{support\PYZus{}}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}print(\PYZdq{}Selected Features: \PYZpc{}s\PYZdq{} \PYZpc{} (fit1.support\PYZus{}))}
+         \PY{c+c1}{\PYZsh{}print(\PYZdq{}Feature Ranking: \PYZpc{}s\PYZdq{} \PYZpc{} (fit.ranking\PYZus{}))}
+         
+         \PY{n}{rank1} \PY{o}{=} \PY{n}{fit}\PY{o}{.}\PY{n}{ranking\PYZus{}}
+         \PY{n}{feat} \PY{o}{=} \PY{n}{fit}\PY{o}{.}\PY{n}{support\PYZus{}}
+         
+         \PY{n}{l1}\PY{o}{=}\PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{feat}\PY{p}{)} \PY{k}{if} \PY{n}{x}\PY{p}{]}
+         
+         \PY{n}{z1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{l1}\PY{p}{:}
+             \PY{n}{z1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{v}\PY{p}{]}\PY{p}{)}
+         \PY{n}{z1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Num Features: 10
+Selected Features: [False False False False  True False False False False False False False
+ False False False False False  True  True  True  True  True  True  True
+  True False  True False False False False False False False False False
+ False]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} ['OverallQual',
+          'BsmtFullBath',
+          'BsmtHalfBath',
+          'FullBath',
+          'HalfBath',
+          'BedroomAbvGr',
+          'KitchenAbvGr',
+          'TotRmsAbvGrd',
+          'Fireplaces',
+          'GarageCars']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}This RFE is including encoded variables (This is selecting only encoded variable!)}
+         \PY{n}{fit1} \PY{o}{=} \PY{n}{rfe}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xvar}\PY{p}{,} \PY{n}{yvar}\PY{p}{)}
+         \PY{n}{fit1}\PY{o}{.}\PY{n}{n\PYZus{}features\PYZus{}}
+         \PY{n}{feat1} \PY{o}{=} \PY{n}{fit1}\PY{o}{.}\PY{n}{support\PYZus{}}
+         
+         \PY{n}{l}\PY{o}{=}\PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{feat1}\PY{p}{)} \PY{k}{if} \PY{n}{x}\PY{p}{]}
+         
+         \PY{n}{z} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{l}\PY{p}{:}
+             \PY{n}{z}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{v}\PY{p}{]}\PY{p}{)}
+         \PY{n}{z}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} ['Functional\_Typ',
+          'FireplaceQu\_Ex',
+          'FireplaceQu\_Fa',
+          'FireplaceQu\_Gd',
+          'FireplaceQu\_Po',
+          'PoolQC\_Fa',
+          'PoolQC\_Gd',
+          'Fence\_GdPrv',
+          'Fence\_GdWo',
+          'Fence\_MnPrv']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}selected variables (We are combing the two RFE results here)}
+         \PY{n}{v\PYZus{}selected} \PY{o}{=} \PY{n}{z}\PY{o}{+}\PY{n}{z1}
+         
+         \PY{c+c1}{\PYZsh{}all variables except for SalePrice}
+         \PY{n}{v\PYZus{}list} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{v\PYZus{}list}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{n}{v\PYZus{}list}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SalePrice}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{v\PYZus{}list}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} ['Id',
+          'MSSubClass',
+          'LotFrontage',
+          'LotArea',
+          'OverallQual',
+          'OverallCond',
+          'YearBuilt',
+          'YearRemodAdd',
+          'MasVnrArea',
+          'BsmtFinSF1',
+          'BsmtFinSF2',
+          'BsmtUnfSF',
+          'TotalBsmtSF',
+          'X1stFlrSF',
+          'X2ndFlrSF',
+          'LowQualFinSF',
+          'GrLivArea',
+          'BsmtFullBath',
+          'BsmtHalfBath',
+          'FullBath',
+          'HalfBath',
+          'BedroomAbvGr',
+          'KitchenAbvGr',
+          'TotRmsAbvGrd',
+          'Fireplaces',
+          'GarageYrBlt',
+          'GarageCars',
+          'GarageArea',
+          'WoodDeckSF',
+          'OpenPorchSF',
+          'EnclosedPorch',
+          'X3SsnPorch',
+          'ScreenPorch',
+          'PoolArea',
+          'MiscVal',
+          'MoSold',
+          'YrSold',
+          'MSZoning\_C (all)',
+          'MSZoning\_FV',
+          'MSZoning\_RH',
+          'MSZoning\_RL',
+          'MSZoning\_RM',
+          'Street\_Grvl',
+          'Street\_Pave',
+          'Alley\_Grvl',
+          'Alley\_Pave',
+          'LotShape\_IR1',
+          'LotShape\_IR2',
+          'LotShape\_IR3',
+          'LotShape\_Reg',
+          'LandContour\_Bnk',
+          'LandContour\_HLS',
+          'LandContour\_Low',
+          'LandContour\_Lvl',
+          'Utilities\_AllPub',
+          'Utilities\_NoSeWa',
+          'LotConfig\_Corner',
+          'LotConfig\_CulDSac',
+          'LotConfig\_FR2',
+          'LotConfig\_FR3',
+          'LotConfig\_Inside',
+          'LandSlope\_Gtl',
+          'LandSlope\_Mod',
+          'LandSlope\_Sev',
+          'Neighborhood\_Blmngtn',
+          'Neighborhood\_Blueste',
+          'Neighborhood\_BrDale',
+          'Neighborhood\_BrkSide',
+          'Neighborhood\_ClearCr',
+          'Neighborhood\_CollgCr',
+          'Neighborhood\_Crawfor',
+          'Neighborhood\_Edwards',
+          'Neighborhood\_Gilbert',
+          'Neighborhood\_IDOTRR',
+          'Neighborhood\_MeadowV',
+          'Neighborhood\_Mitchel',
+          'Neighborhood\_NAmes',
+          'Neighborhood\_NPkVill',
+          'Neighborhood\_NWAmes',
+          'Neighborhood\_NoRidge',
+          'Neighborhood\_NridgHt',
+          'Neighborhood\_OldTown',
+          'Neighborhood\_SWISU',
+          'Neighborhood\_Sawyer',
+          'Neighborhood\_SawyerW',
+          'Neighborhood\_Somerst',
+          'Neighborhood\_StoneBr',
+          'Neighborhood\_Timber',
+          'Neighborhood\_Veenker',
+          'Condition1\_Artery',
+          'Condition1\_Feedr',
+          'Condition1\_Norm',
+          'Condition1\_PosA',
+          'Condition1\_PosN',
+          'Condition1\_RRAe',
+          'Condition1\_RRAn',
+          'Condition1\_RRNe',
+          'Condition1\_RRNn',
+          'Condition2\_Artery',
+          'Condition2\_Feedr',
+          'Condition2\_Norm',
+          'Condition2\_PosA',
+          'Condition2\_PosN',
+          'Condition2\_RRAe',
+          'Condition2\_RRAn',
+          'Condition2\_RRNn',
+          'BldgType\_1Fam',
+          'BldgType\_2fmCon',
+          'BldgType\_Duplex',
+          'BldgType\_Twnhs',
+          'BldgType\_TwnhsE',
+          'HouseStyle\_1.5Fin',
+          'HouseStyle\_1.5Unf',
+          'HouseStyle\_1Story',
+          'HouseStyle\_2.5Fin',
+          'HouseStyle\_2.5Unf',
+          'HouseStyle\_2Story',
+          'HouseStyle\_SFoyer',
+          'HouseStyle\_SLvl',
+          'RoofStyle\_Flat',
+          'RoofStyle\_Gable',
+          'RoofStyle\_Gambrel',
+          'RoofStyle\_Hip',
+          'RoofStyle\_Mansard',
+          'RoofStyle\_Shed',
+          'RoofMatl\_ClyTile',
+          'RoofMatl\_CompShg',
+          'RoofMatl\_Membran',
+          'RoofMatl\_Metal',
+          'RoofMatl\_Roll',
+          'RoofMatl\_Tar\&Grv',
+          'RoofMatl\_WdShake',
+          'RoofMatl\_WdShngl',
+          'Exterior1st\_AsbShng',
+          'Exterior1st\_AsphShn',
+          'Exterior1st\_BrkComm',
+          'Exterior1st\_BrkFace',
+          'Exterior1st\_CBlock',
+          'Exterior1st\_CemntBd',
+          'Exterior1st\_HdBoard',
+          'Exterior1st\_ImStucc',
+          'Exterior1st\_MetalSd',
+          'Exterior1st\_Plywood',
+          'Exterior1st\_Stone',
+          'Exterior1st\_Stucco',
+          'Exterior1st\_VinylSd',
+          'Exterior1st\_Wd Sdng',
+          'Exterior1st\_WdShing',
+          'Exterior2nd\_AsbShng',
+          'Exterior2nd\_AsphShn',
+          'Exterior2nd\_Brk Cmn',
+          'Exterior2nd\_BrkFace',
+          'Exterior2nd\_CBlock',
+          'Exterior2nd\_CmentBd',
+          'Exterior2nd\_HdBoard',
+          'Exterior2nd\_ImStucc',
+          'Exterior2nd\_MetalSd',
+          'Exterior2nd\_Other',
+          'Exterior2nd\_Plywood',
+          'Exterior2nd\_Stone',
+          'Exterior2nd\_Stucco',
+          'Exterior2nd\_VinylSd',
+          'Exterior2nd\_Wd Sdng',
+          'Exterior2nd\_Wd Shng',
+          'MasVnrType\_BrkCmn',
+          'MasVnrType\_BrkFace',
+          'MasVnrType\_None',
+          'MasVnrType\_Stone',
+          'ExterQual\_Ex',
+          'ExterQual\_Fa',
+          'ExterQual\_Gd',
+          'ExterQual\_TA',
+          'ExterCond\_Ex',
+          'ExterCond\_Fa',
+          'ExterCond\_Gd',
+          'ExterCond\_Po',
+          'ExterCond\_TA',
+          'Foundation\_BrkTil',
+          'Foundation\_CBlock',
+          'Foundation\_PConc',
+          'Foundation\_Slab',
+          'Foundation\_Stone',
+          'Foundation\_Wood',
+          'BsmtQual\_Ex',
+          'BsmtQual\_Fa',
+          'BsmtQual\_Gd',
+          'BsmtQual\_TA',
+          'BsmtCond\_Fa',
+          'BsmtCond\_Gd',
+          'BsmtCond\_Po',
+          'BsmtCond\_TA',
+          'BsmtExposure\_Av',
+          'BsmtExposure\_Gd',
+          'BsmtExposure\_Mn',
+          'BsmtExposure\_No',
+          'BsmtFinType1\_ALQ',
+          'BsmtFinType1\_BLQ',
+          'BsmtFinType1\_GLQ',
+          'BsmtFinType1\_LwQ',
+          'BsmtFinType1\_Rec',
+          'BsmtFinType1\_Unf',
+          'BsmtFinType2\_ALQ',
+          'BsmtFinType2\_BLQ',
+          'BsmtFinType2\_GLQ',
+          'BsmtFinType2\_LwQ',
+          'BsmtFinType2\_Rec',
+          'BsmtFinType2\_Unf',
+          'Heating\_Floor',
+          'Heating\_GasA',
+          'Heating\_GasW',
+          'Heating\_Grav',
+          'Heating\_OthW',
+          'Heating\_Wall',
+          'HeatingQC\_Ex',
+          'HeatingQC\_Fa',
+          'HeatingQC\_Gd',
+          'HeatingQC\_Po',
+          'HeatingQC\_TA',
+          'CentralAir\_N',
+          'CentralAir\_Y',
+          'Electrical\_FuseA',
+          'Electrical\_FuseF',
+          'Electrical\_FuseP',
+          'Electrical\_Mix',
+          'Electrical\_SBrkr',
+          'KitchenQual\_Ex',
+          'KitchenQual\_Fa',
+          'KitchenQual\_Gd',
+          'KitchenQual\_TA',
+          'Functional\_Maj1',
+          'Functional\_Maj2',
+          'Functional\_Min1',
+          'Functional\_Min2',
+          'Functional\_Mod',
+          'Functional\_Sev',
+          'Functional\_Typ',
+          'FireplaceQu\_Ex',
+          'FireplaceQu\_Fa',
+          'FireplaceQu\_Gd',
+          'FireplaceQu\_Po',
+          'FireplaceQu\_TA',
+          'GarageType\_2Types',
+          'GarageType\_Attchd',
+          'GarageType\_Basment',
+          'GarageType\_BuiltIn',
+          'GarageType\_CarPort',
+          'GarageType\_Detchd',
+          'GarageFinish\_Fin',
+          'GarageFinish\_RFn',
+          'GarageFinish\_Unf',
+          'GarageQual\_Ex',
+          'GarageQual\_Fa',
+          'GarageQual\_Gd',
+          'GarageQual\_Po',
+          'GarageQual\_TA',
+          'GarageCond\_Ex',
+          'GarageCond\_Fa',
+          'GarageCond\_Gd',
+          'GarageCond\_Po',
+          'GarageCond\_TA',
+          'PavedDrive\_N',
+          'PavedDrive\_P',
+          'PavedDrive\_Y',
+          'PoolQC\_Ex',
+          'PoolQC\_Fa',
+          'PoolQC\_Gd',
+          'Fence\_GdPrv',
+          'Fence\_GdWo',
+          'Fence\_MnPrv',
+          'Fence\_MnWw',
+          'MiscFeature\_Gar2',
+          'MiscFeature\_Othr',
+          'MiscFeature\_Shed',
+          'MiscFeature\_TenC',
+          'SaleType\_COD',
+          'SaleType\_CWD',
+          'SaleType\_Con',
+          'SaleType\_ConLD',
+          'SaleType\_ConLI',
+          'SaleType\_ConLw',
+          'SaleType\_New',
+          'SaleType\_Oth',
+          'SaleType\_WD',
+          'SaleCondition\_Abnorml',
+          'SaleCondition\_AdjLand',
+          'SaleCondition\_Alloca',
+          'SaleCondition\_Family',
+          'SaleCondition\_Normal',
+          'SaleCondition\_Partial']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}list to string}
+         \PY{c+c1}{\PYZsh{}col\PYZus{}list = \PYZdq{} \PYZdq{}.join(str(x) for x in train.columns[:\PYZhy{}1])}
+         \PY{c+c1}{\PYZsh{}col = col\PYZus{}list.replace(\PYZdq{} \PYZdq{}, \PYZdq{} + \PYZdq{})}
+         \PY{c+c1}{\PYZsh{}list(train.columns)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{}all\PYZhy{}variable linear regression}
+         \PY{c+c1}{\PYZsh{}reg1 = smf.ols(\PYZsq{}SalePrice \PYZti{}\PYZsq{}+col, data=train).fit()}
+         \PY{c+c1}{\PYZsh{}print (reg1.summary())}
+\end{Verbatim}
+
+
+    \subsection{Model Adjustments}\label{model-adjustments}
+
+\begin{itemize}
+\tightlist
+\item
+  Correlation Threshold (to identify multicollinearities)
+\item
+  Pick your variables (default is the result of RFE)
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{disp1a}\PY{p}{(}\PY{n}{Cor}\PY{p}{)}\PY{p}{:}
+             \PY{n}{corr} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+             \PY{n}{corr} \PY{o}{=} \PY{n}{corr}\PY{p}{[}\PY{n}{corr} \PY{o}{\PYZgt{}} \PY{n}{Cor}\PY{p}{]}
+             \PY{n}{corr} \PY{o}{=} \PY{n}{corr}\PY{p}{[}\PY{n}{corr}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{corr1} \PY{o}{=} \PY{n}{corr}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{corr}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{corr1} \PY{o}{=} \PY{n}{corr1}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{p}{)}
+             \PY{n}{corr1} \PY{o}{=} \PY{n}{corr1}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{corr1} \PY{o}{=} \PY{n}{corr1}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{corr1} \PY{o}{=} \PY{n}{corr1}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Empty DataFrame}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Columns: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Index: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{corr1} \PY{o}{=} \PY{n}{corr1}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{corr2} \PY{o}{=} \PY{n}{corr}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{corr1}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{corr2}
+             \PY{n}{heat} \PY{o}{=} \PY{n}{sn}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{corr2}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reds}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{return} \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{w} \PY{o}{=} \PY{n}{interactive}\PY{p}{(}\PY{n}{disp1a}\PY{p}{,} \PY{n}{Cor} \PY{o}{=} \PY{n}{FloatSlider}\PY{p}{(}\PY{n}{value}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{n+nb}{min}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{max}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{step} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{)}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+interactive(children=(FloatSlider(value=0.7, description='Cor', max=1.0, step=0.01), Output()), _dom_classes=('widget-interact',))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}Checking for multicollinearities. It seems okay with 70\PYZpc{} correlation threshold.}
+         \PY{n}{v\PYZus{}selected}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} ['Functional\_Typ',
+          'FireplaceQu\_Ex',
+          'FireplaceQu\_Fa',
+          'FireplaceQu\_Gd',
+          'FireplaceQu\_Po',
+          'PoolQC\_Fa',
+          'PoolQC\_Gd',
+          'Fence\_GdPrv',
+          'Fence\_GdWo',
+          'Fence\_MnPrv',
+          'OverallQual',
+          'BsmtFullBath',
+          'BsmtHalfBath',
+          'FullBath',
+          'HalfBath',
+          'BedroomAbvGr',
+          'KitchenAbvGr',
+          'TotRmsAbvGrd',
+          'Fireplaces',
+          'GarageCars']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{def} \PY{n+nf}{disp2a}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:}
+             \PY{n}{SS} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}print(SS)}
+             \PY{c+c1}{\PYZsh{}list to string}
+             \PY{n}{col\PYZus{}list} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{SS}\PY{p}{)}
+             \PY{n}{col} \PY{o}{=} \PY{n}{col\PYZus{}list}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ + }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}linear regression}
+             \PY{n}{reg1} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SalePrice \PYZti{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{col}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{train}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{reg1}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             
+         \PY{n}{P} \PY{o}{=} \PY{n}{interactive}\PY{p}{(}\PY{n}{disp2a}\PY{p}{,} \PY{n}{S} \PY{o}{=} \PY{n}{SelectMultiple}\PY{p}{(}\PY{n}{options}\PY{o}{=}\PY{n}{v\PYZus{}list}\PY{p}{,} 
+                                                     \PY{n}{value}\PY{o}{=}\PY{n}{v\PYZus{}selected}\PY{p}{,}
+                                                     \PY{n}{description} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Correlation Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{style} \PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{description\PYZus{}width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{initial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+                                                     \PY{n}{layout}\PY{o}{=}\PY{n}{Layout}\PY{p}{(}\PY{n}{flex\PYZus{}flow}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{column}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                     \PY{n}{border}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{solid 2px}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                     \PY{n}{align\PYZus{}items}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stretch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                     \PY{n}{width}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{40}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                                     \PY{n}{height}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{200px}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{P}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+interactive(children=(SelectMultiple(description='Correlation Threshold', index=(235, 236, 237, 238, 239, 264, 265, 266, 267, 268, 4, 17, 18, 19, 20, 21, 22, 23, 24, 26), layout=Layout(align_items='stretch', border='solid 2px', flex_flow='column', height='200px', width='40%'), options=('Id', 'MSSubClass', 'LotFrontage', 'LotArea', 'OverallQual', 'OverallCond', 'YearBuilt', 'YearRemodAdd', 'MasVnrArea', 'BsmtFinSF1', 'BsmtFinSF2', 'BsmtUnfSF', 'TotalBsmtSF', 'X1stFlrSF', 'X2ndFlrSF', 'LowQualFinSF', 'GrLivArea', 'BsmtFullBath', 'BsmtHalfBath', 'FullBath', 'HalfBath', 'BedroomAbvGr', 'KitchenAbvGr', 'TotRmsAbvGrd', 'Fireplaces', 'GarageYrBlt', 'GarageCars', 'GarageArea', 'WoodDeckSF', 'OpenPorchSF', 'EnclosedPorch', 'X3SsnPorch', 'ScreenPorch', 'PoolArea', 'MiscVal', 'MoSold', 'YrSold', 'MSZoning_C (all)', 'MSZoning_FV', 'MSZoning_RH', 'MSZoning_RL', 'MSZoning_RM', 'Street_Grvl', 'Street_Pave', 'Alley_Grvl', 'Alley_Pave', 'LotShape_IR1', 'LotShape_IR2', 'LotShape_IR3', 'LotShape_Reg', 'LandContour_Bnk', 'LandContour_HLS', 'LandContour_Low', 'LandContour_Lvl', 'Utilities_AllPub', 'Utilities_NoSeWa', 'LotConfig_Corner', 'LotConfig_CulDSac', 'LotConfig_FR2', 'LotConfig_FR3', 'LotConfig_Inside', 'LandSlope_Gtl', 'LandSlope_Mod', 'LandSlope_Sev', 'Neighborhood_Blmngtn', 'Neighborhood_Blueste', 'Neighborhood_BrDale', 'Neighborhood_BrkSide', 'Neighborhood_ClearCr', 'Neighborhood_CollgCr', 'Neighborhood_Crawfor', 'Neighborhood_Edwards', 'Neighborhood_Gilbert', 'Neighborhood_IDOTRR', 'Neighborhood_MeadowV', 'Neighborhood_Mitchel', 'Neighborhood_NAmes', 'Neighborhood_NPkVill', 'Neighborhood_NWAmes', 'Neighborhood_NoRidge', 'Neighborhood_NridgHt', 'Neighborhood_OldTown', 'Neighborhood_SWISU', 'Neighborhood_Sawyer', 'Neighborhood_SawyerW', 'Neighborhood_Somerst', 'Neighborhood_StoneBr', 'Neighborhood_Timber', 'Neighborhood_Veenker', 'Condition1_Artery', 'Condition1_Feedr', 'Condition1_Norm', 'Condition1_PosA', 'Condition1_PosN', 'Condition1_RRAe', 'Condition1_RRAn', 'Condition1_RRNe', 'Condition1_RRNn', 'Condition2_Artery', 'Condition2_Feedr', 'Condition2_Norm', 'Condition2_PosA', 'Condition2_PosN', 'Condition2_RRAe', 'Condition2_RRAn', 'Condition2_RRNn', 'BldgType_1Fam', 'BldgType_2fmCon', 'BldgType_Duplex', 'BldgType_Twnhs', 'BldgType_TwnhsE', 'HouseStyle_1.5Fin', 'HouseStyle_1.5Unf', 'HouseStyle_1Story', 'HouseStyle_2.5Fin', 'HouseStyle_2.5Unf', 'HouseStyle_2Story', 'HouseStyle_SFoyer', 'HouseStyle_SLvl', 'RoofStyle_Flat', 'RoofStyle_Gable', 'RoofStyle_Gambrel', 'RoofStyle_Hip', 'RoofStyle_Mansard', 'RoofStyle_Shed', 'RoofMatl_ClyTile', 'RoofMatl_CompShg', 'RoofMatl_Membran', 'RoofMatl_Metal', 'RoofMatl_Roll', 'RoofMatl_Tar&Grv', 'RoofMatl_WdShake', 'RoofMatl_WdShngl', 'Exterior1st_AsbShng', 'Exterior1st_AsphShn', 'Exterior1st_BrkComm', 'Exterior1st_BrkFace', 'Exterior1st_CBlock', 'Exterior1st_CemntBd', 'Exterior1st_HdBoard', 'Exterior1st_ImStucc', 'Exterior1st_MetalSd', 'Exterior1st_Plywood', 'Exterior1st_Stone', 'Exterior1st_Stucco', 'Exterior1st_VinylSd', 'Exterior1st_Wd Sdng', 'Exterior1st_WdShing', 'Exterior2nd_AsbShng', 'Exterior2nd_AsphShn', 'Exterior2nd_Brk Cmn', 'Exterior2nd_BrkFace', 'Exterior2nd_CBlock', 'Exterior2nd_CmentBd', 'Exterior2nd_HdBoard', 'Exterior2nd_ImStucc', 'Exterior2nd_MetalSd', 'Exterior2nd_Other', 'Exterior2nd_Plywood', 'Exterior2nd_Stone', 'Exterior2nd_Stucco', 'Exterior2nd_VinylSd', 'Exterior2nd_Wd Sdng', 'Exterior2nd_Wd Shng', 'MasVnrType_BrkCmn', 'MasVnrType_BrkFace', 'MasVnrType_None', 'MasVnrType_Stone', 'ExterQual_Ex', 'ExterQual_Fa', 'ExterQual_Gd', 'ExterQual_TA', 'ExterCond_Ex', 'ExterCond_Fa', 'ExterCond_Gd', 'ExterCond_Po', 'ExterCond_TA', 'Foundation_BrkTil', 'Foundation_CBlock', 'Foundation_PConc', 'Foundation_Slab', 'Foundation_Stone', 'Foundation_Wood', 'BsmtQual_Ex', 'BsmtQual_Fa', 'BsmtQual_Gd', 'BsmtQual_TA', 'BsmtCond_Fa', 'BsmtCond_Gd', 'BsmtCond_Po', 'BsmtCond_TA', 'BsmtExposure_Av', 'BsmtExposure_Gd', 'BsmtExposure_Mn', 'BsmtExposure_No', 'BsmtFinType1_ALQ', 'BsmtFinType1_BLQ', 'BsmtFinType1_GLQ', 'BsmtFinType1_LwQ', 'BsmtFinType1_Rec', 'BsmtFinType1_Unf', 'BsmtFinType2_ALQ', 'BsmtFinType2_BLQ', 'BsmtFinType2_GLQ', 'BsmtFinType2_LwQ', 'BsmtFinType2_Rec', 'BsmtFinType2_Unf', 'Heating_Floor', 'Heating_GasA', 'Heating_GasW', 'Heating_Grav', 'Heating_OthW', 'Heating_Wall', 'HeatingQC_Ex', 'HeatingQC_Fa', 'HeatingQC_Gd', 'HeatingQC_Po', 'HeatingQC_TA', 'CentralAir_N', 'CentralAir_Y', 'Electrical_FuseA', 'Electrical_FuseF', 'Electrical_FuseP', 'Electrical_Mix', 'Electrical_SBrkr', 'KitchenQual_Ex', 'KitchenQual_Fa', 'KitchenQual_Gd', 'KitchenQual_TA', 'Functional_Maj1', 'Functional_Maj2', 'Functional_Min1', 'Functional_Min2', 'Functional_Mod', 'Functional_Sev', 'Functional_Typ', 'FireplaceQu_Ex', 'FireplaceQu_Fa', 'FireplaceQu_Gd', 'FireplaceQu_Po', 'FireplaceQu_TA', 'GarageType_2Types', 'GarageType_Attchd', 'GarageType_Basment', 'GarageType_BuiltIn', 'GarageType_CarPort', 'GarageType_Detchd', 'GarageFinish_Fin', 'GarageFinish_RFn', 'GarageFinish_Unf', 'GarageQual_Ex', 'GarageQual_Fa', 'GarageQual_Gd', 'GarageQual_Po', 'GarageQual_TA', 'GarageCond_Ex', 'GarageCond_Fa', 'GarageCond_Gd', 'GarageCond_Po', 'GarageCond_TA', 'PavedDrive_N', 'PavedDrive_P', 'PavedDrive_Y', 'PoolQC_Ex', 'PoolQC_Fa', 'PoolQC_Gd', 'Fence_GdPrv', 'Fence_GdWo', 'Fence_MnPrv', 'Fence_MnWw', 'MiscFeature_Gar2', 'MiscFeature_Othr', 'MiscFeature_Shed', 'MiscFeature_TenC', 'SaleType_COD', 'SaleType_CWD', 'SaleType_Con', 'SaleType_ConLD', 'SaleType_ConLI', 'SaleType_ConLw', 'SaleType_New', 'SaleType_Oth', 'SaleType_WD', 'SaleCondition_Abnorml', 'SaleCondition_AdjLand', 'SaleCondition_Alloca', 'SaleCondition_Family', 'SaleCondition_Normal', 'SaleCondition_Partial'), style=DescriptionStyle(description_width='initial'), value=('Functional_Typ', 'FireplaceQu_Ex', 'FireplaceQu_Fa', 'FireplaceQu_Gd', 'FireplaceQu_Po', 'PoolQC_Fa', 'PoolQC_Gd', 'Fence_GdPrv', 'Fence_GdWo', 'Fence_MnPrv', 'OverallQual', 'BsmtFullBath', 'BsmtHalfBath', 'FullBath', 'HalfBath', 'BedroomAbvGr', 'KitchenAbvGr', 'TotRmsAbvGrd', 'Fireplaces', 'GarageCars')), Output()), _dom_classes=('widget-interact',))
+    \end{verbatim}
+
+    
+    \subsection{Prediction and Validation}\label{prediction-and-validation}
+
+Using the above model, we will predict and validate the model comparing
+Root Mean Squared Error (RMSE).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}Predict train set}
+         \PY{n}{X} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{v\PYZus{}selected}\PY{p}{]}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SalePrice}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{regr} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{regr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         \PY{n}{pred\PYZus{}train} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}Predict test set}
+         \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{n}{v\PYZus{}selected}\PY{p}{]}
+         \PY{n}{Y\PYZus{}test} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SalePrice}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{regr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{Y\PYZus{}test}\PY{p}{)}
+         \PY{n}{pred\PYZus{}test} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{}calculate RMSE of both train and test set}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+         
+         \PY{n}{lin\PYZus{}mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{pred\PYZus{}train}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         \PY{n}{lin\PYZus{}rmse} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{lin\PYZus{}mse}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear Regression RMSE \PYZhy{} Train: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{lin\PYZus{}rmse}\PY{p}{)}
+         
+         \PY{n}{lin\PYZus{}mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{pred\PYZus{}test}\PY{p}{,} \PY{n}{Y\PYZus{}test}\PY{p}{)}
+         \PY{n}{lin\PYZus{}rmse} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{lin\PYZus{}mse}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear Regression RMSE \PYZhy{} Test: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{lin\PYZus{}rmse}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}The model is slightly underfit but acceptable}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Linear Regression RMSE - Train: 37549.4296
+Linear Regression RMSE - Test: 37382.7285
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
